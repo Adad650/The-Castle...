@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://crawatp7cq3br"]
+
+[ext_resource type="Script" uid="uid://dimpe3jb3jv3b" path="res://scenes/jumpscareUI.gd" id="1_r0lou"]
+[ext_resource type="AudioStream" uid="uid://bxgos2mxvk86w" path="res://scenes/jumpscare.mp3" id="2_30nab"]
+
+[node name="JumpscareOverlay" type="CanvasLayer"]
+script = ExtResource("1_r0lou")
+
+[node name="Overlay" type="ColorRect" parent="."]
+anchors_preset = -1
+anchor_right = 0.999
+anchor_bottom = 1.008
+offset_right = 0.151855
+offset_bottom = -0.184021
+color = Color(0, 0, 0, 1)
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_30nab")
+max_db = 6.0
+bus = &"Jumpscare"
