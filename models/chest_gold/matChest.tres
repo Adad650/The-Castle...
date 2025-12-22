@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://63siunu223tm"]
+
+[ext_resource type="Texture2D" uid="uid://b7h5aqc8454cy" path="res://models/chest_gold/chest_texture.png" id="1_snqe4"]
+
+[resource]
+albedo_color = Color(0.780392, 0.780392, 0.780392, 1)
+albedo_texture = ExtResource("1_snqe4")
+emission = Color(0.984314, 0, 0, 1)
+emission_energy_multiplier = 19.23

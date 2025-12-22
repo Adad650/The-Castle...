@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5ar2dnm52u5o"]
+
+[ext_resource type="PackedScene" uid="uid://c7dmakwpaiuqv" path="res://models/weepingAngel/SoldierStatue.glb" id="1_1aybk"]
+[ext_resource type="Script" uid="uid://bv1a1rd3xlr5j" path="res://scenes/angel.gd" id="1_nvp8c"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1aybk"]
+radius = 0.735004
+height = 2.72058
+
+[node name="Angel" type="CharacterBody3D"]
+script = ExtResource("1_nvp8c")
+move_speed = null
+sprint_speed = null
+stop_distance = null
+visible_point_height = null
+edge_margin_ratio = null
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.38587, 0, 0, 0, 1, 0.0154622, 1.18129, -0.209905)
+shape = SubResource("CapsuleShape3D_1aybk")
+
+[node name="SightRay" type="RayCast3D" parent="."]
+exclude_parent = false
+
+[node name="Visuals" parent="." instance=ExtResource("1_1aybk")]
+transform = Transform3D(-0.999991, 0, 0.00420632, 0, 1, 0, -0.00420632, 0, -0.999991, 0.0475701, 0, -0.107866)

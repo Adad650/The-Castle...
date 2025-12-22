@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://bska7hie6dlbn"]
+
+[node name="Node2D" type="Node2D"]
+rotation = 0.523599
+skew = -1.56905
