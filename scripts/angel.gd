@@ -3,21 +3,21 @@ extends CharacterBody3D
 @export var move_speed: float = 12.0
 @export var sprint_speed: float = 24.0
 @export var stop_distance: float = 1.6
-@export var visible_point_height: float = 1.2
-@export var offscreen_margin_deg: float = 7.5
 
-# NEW: How far apart the side raycasts are (adjust based on your model's width)
-@export var shoulder_width: float = 0.5 
+@export var offscreen_margin_deg: float = 15.0
+@export var check_height_top: float = 1.7
+@export var check_height_mid: float = 1.0
+@export var check_height_bot: float = 0.2
+@export var check_width: float = 0.45 
 
 @export var player: CharacterBody3D
 @export var cam: Camera3D
 
 @export var hit_area: Area3D
+
 @export var jumpscare_overlay: ColorRect
 @export var you_died_label: Label
 @export var jumpscare_sfx: AudioStreamPlayer
-
-@export var jumpscare_duration: float = 1.2
 @export var jumpscare_volume_db: float = 45.0
 
 var frozen: bool = false
@@ -52,7 +52,7 @@ func _ready() -> void:
 	if player == null or cam == null:
 		push_error("Angel.gd: Missing player or camera references.")
 
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.1).timeout
 	_can_trigger = true
 
 func _physics_process(_delta: float) -> void:
@@ -81,18 +81,6 @@ func _start_jumpscare() -> void:
 	_can_trigger = false
 	velocity = Vector3.ZERO
 	
-	if jumpscare_overlay != null:
-		jumpscare_overlay.visible = true
-	if you_died_label != null:
-		you_died_label.text = "YOU DIED"
-		you_died_label.visible = true
-
-	if jumpscare_sfx != null:
-		jumpscare_sfx.volume_db = jumpscare_volume_db
-		jumpscare_sfx.play()
-
-	await get_tree().create_timer(jumpscare_duration).timeout
-
 	get_tree().change_scene_to_file("res://scenes/JumpscareOverlay.tscn")
 
 func _move_towards_player() -> void:
@@ -118,19 +106,17 @@ func _move_towards_player() -> void:
 	move_and_slide()
 
 func _should_freeze() -> bool:
-	# 1. First, check if the general direction is within the Camera FOV
-	# We use the head point for the FOV math
-	var head_pos: Vector3 = global_position + Vector3.UP * visible_point_height
-	var dir_world: Vector3 = (head_pos - cam.global_position).normalized()
+	var check_pos_center: Vector3 = global_position + Vector3.UP * check_height_mid
+	
+	var dir_world: Vector3 = (check_pos_center - cam.global_position).normalized()
 	var dir_local: Vector3 = cam.global_transform.basis.inverse() * dir_world
 
-	# If behind camera
 	if dir_local.z >= 0.0:
 		return false
 
-	# Calculate FOV angles
 	var viewport_size: Vector2 = cam.get_viewport().get_visible_rect().size
 	var aspect: float = viewport_size.x / max(1.0, viewport_size.y)
+
 	var h_fov_deg: float
 	var v_fov_deg: float
 
@@ -149,42 +135,30 @@ func _should_freeze() -> bool:
 	var h_freeze_limit: float = (h_fov_deg * 0.5) + offscreen_margin_deg
 	var v_freeze_limit: float = (v_fov_deg * 0.5)
 
-	# If completely off screen based on angles
 	if h_angle_deg > h_freeze_limit or v_angle_deg > v_freeze_limit:
 		return false
 
-	# 2. If we are inside the FOV, perform the detailed Raycasts (Head + Shoulders)
-	return _is_any_part_visible(cam.global_position)
+	var basis_x = global_transform.basis.x
+	var points_to_check = []
+	
+	points_to_check.append(global_position + Vector3.UP * check_height_top)
+	points_to_check.append(global_position + Vector3.UP * check_height_mid)
+	points_to_check.append(global_position + Vector3.UP * check_height_bot)
+	points_to_check.append(global_position + Vector3.UP * check_height_mid - basis_x * check_width)
+	points_to_check.append(global_position + Vector3.UP * check_height_mid + basis_x * check_width)
 
+	for point in points_to_check:
+		if _has_clear_line_of_sight(cam.global_position, point):
+			return true
 
-func _is_any_part_visible(from_pos: Vector3) -> bool:
-	# Define offsets based on current rotation (Basis)
-	var right_dir = global_transform.basis.x
-	
-	# Point 1: Top Head
-	var p1 = global_position + Vector3.UP * visible_point_height
-	# Point 2: Right Shoulder (Lower than head, shifted right)
-	var p2 = global_position + Vector3.UP * (visible_point_height * 0.8) + (right_dir * shoulder_width)
-	# Point 3: Left Shoulder (Lower than head, shifted left)
-	var p3 = global_position + Vector3.UP * (visible_point_height * 0.8) - (right_dir * shoulder_width)
-	
-	# If ANY of these hit, we are visible
-	if _raycast_check(from_pos, p1): return true
-	if _raycast_check(from_pos, p2): return true
-	if _raycast_check(from_pos, p3): return true
-	
 	return false
 
-func _raycast_check(from_pos: Vector3, to_pos: Vector3) -> bool:
+func _has_clear_line_of_sight(from_pos: Vector3, to_pos: Vector3) -> bool:
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(from_pos, to_pos)
-	
-	# Don't let the angel block its own view, or the player block the view
 	query.exclude = [self, player]
 	query.collide_with_areas = false
 	query.collide_with_bodies = true
 
 	var hit: Dictionary = space_state.intersect_ray(query)
-	
-	# If hit is empty, it means the ray reached the target point unobstructed
 	return hit.is_empty()
