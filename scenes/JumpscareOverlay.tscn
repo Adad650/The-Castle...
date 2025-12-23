@@ -1,20 +1,38 @@
-[gd_scene load_steps=3 format=3 uid="uid://crawatp7cq3br"]
+[gd_scene load_steps=4 format=3 uid="uid://crawatp7cq3br"]
 
 [ext_resource type="Script" uid="uid://dimpe3jb3jv3b" path="res://scenes/jumpscareUI.gd" id="1_r0lou"]
-[ext_resource type="AudioStream" uid="uid://bxgos2mxvk86w" path="res://scenes/jumpscare.mp3" id="2_30nab"]
+[ext_resource type="AudioStream" uid="uid://cwkhj8vu55nh2" path="res://scenes/jumpscareFixed.mp3.MP3" id="2_30nab"]
+[ext_resource type="Texture2D" uid="uid://cm3vjh6j37xvq" path="res://scenes/killScreen.png" id="3_r0lou"]
 
 [node name="JumpscareOverlay" type="CanvasLayer"]
 script = ExtResource("1_r0lou")
 
-[node name="Overlay" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = -1
-anchor_right = 0.999
-anchor_bottom = 1.008
-offset_right = 0.151855
-offset_bottom = -0.184021
+anchor_left = -0.048
+anchor_top = -0.091
+anchor_right = 1.049
+anchor_bottom = 1.068
+offset_left = 0.296001
+offset_top = -0.0319977
+offset_right = 0.552002
+offset_bottom = -0.0640259
 color = Color(0, 0, 0, 1)
 
-[node name="SFX" type="AudioStreamPlayer3D" parent="."]
+[node name="SFX2" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_30nab")
-max_db = 6.0
-bus = &"Jumpscare"
+volume_db = 24.0
+autoplay = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = -1
+anchor_left = -0.055
+anchor_top = -0.071
+anchor_right = 1.045
+anchor_bottom = 1.043
+offset_left = 0.360004
+offset_top = -9.992
+offset_right = -0.840088
+offset_bottom = 10.1359
+texture = ExtResource("3_r0lou")
+expand_mode = 1

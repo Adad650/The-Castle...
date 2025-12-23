@@ -1,59 +1,63 @@
 extends CharacterBody3D
 
-@export var move_speed: float = 6.0
-@export var sprint_speed: float = 12.0
+@export var move_speed: float = 12.0
+@export var sprint_speed: float = 24.0
 @export var stop_distance: float = 1.6
-
 @export var visible_point_height: float = 1.2
 @export var offscreen_margin_deg: float = 7.5
+
+# NEW: How far apart the side raycasts are (adjust based on your model's width)
+@export var shoulder_width: float = 0.5 
 
 @export var player: CharacterBody3D
 @export var cam: Camera3D
 
 @export var hit_area: Area3D
 @export var jumpscare_overlay: ColorRect
+@export var you_died_label: Label
 @export var jumpscare_sfx: AudioStreamPlayer
 
 @export var jumpscare_duration: float = 1.2
 @export var jumpscare_volume_db: float = 45.0
-@export var death_text: String = "YOU DIED"
 
 var frozen: bool = false
 var jumpscaring: bool = false
-var died_label: Label
+var _can_trigger: bool = false
 
+var _angel_start_transform: Transform3D
+var _player_start_transform: Transform3D
 
 func _ready() -> void:
+	_angel_start_transform = global_transform
+
 	if player == null:
 		player = get_parent().get_node_or_null("player") as CharacterBody3D
-
-	if cam == null and player != null:
-		cam = player.get_node_or_null("Head/Camera3D") as Camera3D
+	
+	if player != null:
+		_player_start_transform = player.global_transform
+		if cam == null:
+			cam = player.get_node_or_null("Head/Camera3D") as Camera3D
 
 	if hit_area == null:
 		hit_area = get_node_or_null("HitArea") as Area3D
-
-	if hit_area != null and not hit_area.body_entered.is_connected(_on_hit_area_body_entered):
+	
+	if hit_area != null:
 		hit_area.body_entered.connect(_on_hit_area_body_entered)
 
 	if jumpscare_overlay != null:
 		jumpscare_overlay.visible = false
-		_setup_died_label()
+	if you_died_label != null:
+		you_died_label.visible = false
 
 	if player == null or cam == null:
-		push_error("Angel.gd: Missing player/cam reference.")
+		push_error("Angel.gd: Missing player or camera references.")
 
-	if hit_area == null:
-		push_error("Angel.gd: Missing HitArea (Area3D). Add a child Area3D named 'HitArea' with a CollisionShape3D.")
+	await get_tree().create_timer(0.5).timeout
+	_can_trigger = true
 
-
-func _physics_process(delta: float) -> void:
-	if jumpscaring:
+func _physics_process(_delta: float) -> void:
+	if jumpscaring or player == null or cam == null:
 		velocity = Vector3.ZERO
-		move_and_slide()
-		return
-
-	if player == null or cam == null:
 		return
 
 	frozen = _should_freeze()
@@ -65,60 +69,31 @@ func _physics_process(delta: float) -> void:
 
 	_move_towards_player()
 
-
 func _on_hit_area_body_entered(body: Node) -> void:
-	if jumpscaring:
+	if not _can_trigger or jumpscaring:
 		return
 	if body == player:
 		_start_jumpscare()
 
-
 func _start_jumpscare() -> void:
 	jumpscaring = true
 	frozen = true
+	_can_trigger = false
 	velocity = Vector3.ZERO
-
+	
 	if jumpscare_overlay != null:
 		jumpscare_overlay.visible = true
-
-	if died_label != null:
-		died_label.text = death_text
-		died_label.visible = true
+	if you_died_label != null:
+		you_died_label.text = "YOU DIED"
+		you_died_label.visible = true
 
 	if jumpscare_sfx != null:
 		jumpscare_sfx.volume_db = jumpscare_volume_db
-		jumpscare_sfx.stop()
 		jumpscare_sfx.play()
 
 	await get_tree().create_timer(jumpscare_duration).timeout
 
-	get_tree().reload_current_scene()
-
-
-func _setup_died_label() -> void:
-	if jumpscare_overlay == null:
-		return
-
-	died_label = jumpscare_overlay.get_node_or_null("DiedLabel") as Label
-	if died_label == null:
-		died_label = Label.new()
-		died_label.name = "DiedLabel"
-		jumpscare_overlay.add_child(died_label)
-
-	died_label.visible = false
-	died_label.text = death_text
-	died_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	died_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	died_label.anchor_left = 0.0
-	died_label.anchor_top = 0.0
-	died_label.anchor_right = 1.0
-	died_label.anchor_bottom = 1.0
-	died_label.offset_left = 0.0
-	died_label.offset_top = 0.0
-	died_label.offset_right = 0.0
-	died_label.offset_bottom = 0.0
-	died_label.autowrap_mode = TextServer.AUTOWRAP_OFF
-
+	get_tree().change_scene_to_file("res://scenes/JumpscareOverlay.tscn")
 
 func _move_towards_player() -> void:
 	var to_player: Vector3 = player.global_position - global_position
@@ -142,18 +117,20 @@ func _move_towards_player() -> void:
 
 	move_and_slide()
 
-
 func _should_freeze() -> bool:
-	var check_pos: Vector3 = global_position + Vector3.UP * visible_point_height
-	var dir_world: Vector3 = (check_pos - cam.global_position).normalized()
+	# 1. First, check if the general direction is within the Camera FOV
+	# We use the head point for the FOV math
+	var head_pos: Vector3 = global_position + Vector3.UP * visible_point_height
+	var dir_world: Vector3 = (head_pos - cam.global_position).normalized()
 	var dir_local: Vector3 = cam.global_transform.basis.inverse() * dir_world
 
+	# If behind camera
 	if dir_local.z >= 0.0:
 		return false
 
+	# Calculate FOV angles
 	var viewport_size: Vector2 = cam.get_viewport().get_visible_rect().size
-	var aspect: float = float(viewport_size.x) / max(1.0, float(viewport_size.y))
-
+	var aspect: float = viewport_size.x / max(1.0, viewport_size.y)
 	var h_fov_deg: float
 	var v_fov_deg: float
 
@@ -172,25 +149,42 @@ func _should_freeze() -> bool:
 	var h_freeze_limit: float = (h_fov_deg * 0.5) + offscreen_margin_deg
 	var v_freeze_limit: float = (v_fov_deg * 0.5)
 
-	if h_angle_deg > h_freeze_limit:
+	# If completely off screen based on angles
+	if h_angle_deg > h_freeze_limit or v_angle_deg > v_freeze_limit:
 		return false
-	if v_angle_deg > v_freeze_limit:
-		return false
 
-	return _has_clear_line_of_sight(cam.global_position, check_pos)
+	# 2. If we are inside the FOV, perform the detailed Raycasts (Head + Shoulders)
+	return _is_any_part_visible(cam.global_position)
 
 
-func _has_clear_line_of_sight(from_pos: Vector3, to_pos: Vector3) -> bool:
+func _is_any_part_visible(from_pos: Vector3) -> bool:
+	# Define offsets based on current rotation (Basis)
+	var right_dir = global_transform.basis.x
+	
+	# Point 1: Top Head
+	var p1 = global_position + Vector3.UP * visible_point_height
+	# Point 2: Right Shoulder (Lower than head, shifted right)
+	var p2 = global_position + Vector3.UP * (visible_point_height * 0.8) + (right_dir * shoulder_width)
+	# Point 3: Left Shoulder (Lower than head, shifted left)
+	var p3 = global_position + Vector3.UP * (visible_point_height * 0.8) - (right_dir * shoulder_width)
+	
+	# If ANY of these hit, we are visible
+	if _raycast_check(from_pos, p1): return true
+	if _raycast_check(from_pos, p2): return true
+	if _raycast_check(from_pos, p3): return true
+	
+	return false
+
+func _raycast_check(from_pos: Vector3, to_pos: Vector3) -> bool:
 	var space_state: PhysicsDirectSpaceState3D = get_world_3d().direct_space_state
 	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(from_pos, to_pos)
-
-	var exclude_list: Array = [self]
-	if player != null:
-		exclude_list.append(player)
-	query.exclude = exclude_list
-
+	
+	# Don't let the angel block its own view, or the player block the view
+	query.exclude = [self, player]
 	query.collide_with_areas = false
 	query.collide_with_bodies = true
 
 	var hit: Dictionary = space_state.intersect_ray(query)
+	
+	# If hit is empty, it means the ray reached the target point unobstructed
 	return hit.is_empty()
