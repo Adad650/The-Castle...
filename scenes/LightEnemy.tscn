@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://6b7h0wl3oyh5"]
 
 [ext_resource type="PackedScene" uid="uid://c7dmakwpaiuqv" path="res://models/weepingAngel/SoldierStatue.glb" id="1_8vxmn"]
-[ext_resource type="Script" uid="uid://5siqmmyqk8hw" path="res://scenes/light_enemy.gd" id="1_vwhff"]
+[ext_resource type="Script" uid="uid://5siqmmyqk8hw" path="res://scripts/light_enemy.gd" id="1_vwhff"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_8vxmn"]
 height = 3.03931
