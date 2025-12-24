@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://s7q6ctg7glxl"]
+[gd_scene load_steps=27 format=3 uid="uid://s7q6ctg7glxl"]
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://addons/proto_controller/proto_controller.tscn" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://6b7h0wl3oyh5" path="res://scenes/LightEnemy.tscn" id="2_a8y0u"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dblgcpfmjtlsk" path="res://scenes/shadowRunner.tscn" id="11_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://c5ar2dnm52u5o" path="res://scenes/Angel.tscn" id="12_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://c01nuxf2be1u6" path="res://buildings/floorWood.tscn" id="13_trceg"]
+[ext_resource type="Script" uid="uid://gft2xy7x72o" path="res://scripts/movingWall.gd" id="15_jkv2x"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -57,6 +58,45 @@ I̴͕̼̿̅ ̴̧͈͙̀̓̿ͅa̶͈͎͓̎̒͆̾͝m̷̺̫̝̳̂̋́́͒ ̴́̐͐͝�
 To be continued...
 "
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_a8y0u"]
+size = Vector3(1.80273, 0.277771, 2.4649)
+
+[sub_resource type="Animation" id="Animation_a8y0u"]
+resource_name = "movingWall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.10273, 17.4538, -32.3295), Vector3(-1.10273, 13.6024, -32.3295)]
+}
+
+[sub_resource type="Animation" id="Animation_jkv2x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.10273, 17.4538, -32.3295)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jkv2x"]
+_data = {
+&"RESET": SubResource("Animation_jkv2x"),
+&"movingWall": SubResource("Animation_a8y0u")
+}
+
 [node name="Node3D" type="Node3D"]
 transform = Transform3D(0.999942, 0.000725462, -0.0107537, -0.000721063, 1, 0.000412856, 0.010754, -0.000405077, 0.999942, 0, 6.04113, 0)
 
@@ -68,6 +108,7 @@ environment = SubResource("Environment_0xm2m")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.772855, 0.549564, -0.317291, 8.45466e-08, 0.5, 0.866026, 0.634582, -0.669313, 0.386428, 0.0260146, 12.7735, 12.8928)
+visible = false
 light_energy = 0.0
 light_volumetric_fog_energy = 0.0
 light_angular_distance = 89.09
@@ -107,7 +148,7 @@ transform = Transform3D(2.31944, 0, 0, 0, 2.2277, 0, 0, 0, 1, -2.27541, 3.72161,
 mesh = SubResource("TextMesh_a8y0u")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Text"]
-transform = Transform3D(-0.00202457, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00202457, -1.059, 17.499, -33.3158)
+transform = Transform3D(-0.00202457, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00202457, -1.059, 17.499, -32.1737)
 mesh = SubResource("TextMesh_jkv2x")
 
 [node name="StaticBody3D" parent="." instance=ExtResource("5_tbgi4")]
@@ -2145,7 +2186,19 @@ transform = Transform3D(1, -9.79981e-10, 0, 9.8953e-10, 1, 4.94765e-10, 0, 2.619
 transform = Transform3D(1, -1.03819e-09, 0, 1.04774e-09, 1, 5.23869e-10, 0, 2.61934e-10, 1, 0.897819, 15.4456, -35.2302)
 
 [node name="StaticBody3D728" parent="Buildings" instance=ExtResource("13_trceg")]
-transform = Transform3D(0.0146253, 0.999893, 5.23813e-10, -0.999893, 0.0146253, 7.66176e-12, 0, 2.61934e-10, 1, -1.10273, 17.4538, -33.4716)
+transform = Transform3D(0.0146253, 0.999893, 5.23813e-10, -0.999893, 0.0146253, 7.66176e-12, 0, 2.61934e-10, 1, -1.10273, 17.4538, -32.3295)
+script = ExtResource("15_jkv2x")
+
+[node name="Area3D" type="Area3D" parent="Buildings/StaticBody3D728"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Buildings/StaticBody3D728/Area3D"]
+transform = Transform3D(1, 4.77102e-27, -2.42861e-17, 0, 1, 1.19904e-14, 0, 0, 1, 0.401367, 0.486969, -0.0375061)
+shape = SubResource("BoxShape3D_a8y0u")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Buildings/StaticBody3D728"]
+libraries = {
+&"": SubResource("AnimationLibrary_jkv2x")
+}
 
 [node name="StaticBody3D671" parent="Buildings" instance=ExtResource("13_trceg")]
 transform = Transform3D(1, -1.0964e-09, 0, 1.10595e-09, 1, 5.52973e-10, 0, 2.61934e-10, 1, 0.897774, 15.4456, -39.0989)
@@ -2309,14 +2362,13 @@ transform = Transform3D(1, -5.13865e-10, 0, 5.23869e-10, 1, 2.61934e-10, 0, 2.61
 [node name="StaticBody3D724" parent="Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(-0.00631809, 1.59207e-09, -0.99998, 6.69388e-10, 1, 5.6616e-11, 0.99998, -7.85803e-10, -0.0063181, -1.47229, 15.4955, -28.3912)
 
-[node name="StaticBody3D725" parent="Buildings" instance=ExtResource("4_jyhfs")]
-transform = Transform3D(-0.00631809, 1.59207e-09, -0.99998, 6.98492e-10, 1, -2.04636e-12, 0.99998, -7.85803e-10, -0.00631811, -1.47229, 15.4955, -32.3773)
-
 [node name="StaticBody3D726" parent="Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(-0.00631809, 1.59207e-09, -0.99998, 7.27596e-10, 1, -6.05951e-11, 0.99998, -7.85803e-10, -0.00631811, -1.47229, 15.4955, -35.9629)
 
 [node name="StaticBody3D727" parent="Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(-0.00631808, 1.59207e-09, -0.99998, 7.567e-10, 1, -1.19257e-10, 0.99998, -7.85803e-10, -0.00631811, -1.47229, 15.4955, -39.6867)
+
+[connection signal="body_entered" from="Buildings/StaticBody3D728/Area3D" to="Buildings/StaticBody3D728" method="_on_area_3d_body_entered"]
 
 [editable path="player"]
 [editable path="shadowRunner"]
