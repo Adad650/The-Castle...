@@ -98,11 +98,16 @@ func _move_towards_player() -> void:
 
 # --- THE FIXED 3D DETECTION LOGIC ---
 func _should_freeze() -> bool:
+	# 1. NEW: BLINK CHECK
+	# If player is blinking, return FALSE (Do Not Freeze)
+	if player.get("is_blinking") == true:
+		return false
+	
 	var origin_pos: Vector3
 	var forward_vec: Vector3
 	var angle_limit: float
 	
-	# 1. DETERMINE SOURCE (Flashlight Preferred, Camera Fallback)
+	# 2. DETERMINE SOURCE (Flashlight Preferred, Camera Fallback)
 	if flashlight != null and flashlight.visible:
 		origin_pos = flashlight.global_position
 		# In Godot, SpotLights shine towards -Z (Negative Z)
@@ -117,7 +122,7 @@ func _should_freeze() -> bool:
 	else:
 		return false # No eyes, cannot freeze
 
-	# 2. CHECK BODY PARTS
+	# 3. CHECK BODY PARTS
 	var basis_x = global_transform.basis.x
 	var points_to_check = []
 	

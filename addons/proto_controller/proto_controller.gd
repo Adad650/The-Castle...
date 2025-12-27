@@ -50,8 +50,9 @@ var current_eye_time: float = 0.0
 @onready var flashlight: SpotLight3D = $Head/Camera3D/Flashlight
 
 # We grab these in _ready to ensure they exist
-var blink_overlay: ColorRect 
-var fatigue_bar: ProgressBar # Or TextureProgressBar
+@onready var blink_overlay: ColorRect = $CanvasLayer/BlinkOverlay
+@onready var fatigue_bar: ProgressBar = $CanvasLayer/EyeFatigueBar
+
 
 func _ready() -> void:
 	# --- DEBUGGING UI CONNECTION ---

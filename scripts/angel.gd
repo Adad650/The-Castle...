@@ -81,6 +81,7 @@ func _start_jumpscare() -> void:
 	_can_trigger = false
 	velocity = Vector3.ZERO
 	
+	# Make sure this path exists in your project!
 	get_tree().change_scene_to_file("res://scenes/JumpscareOverlay.tscn")
 
 func _move_towards_player() -> void:
@@ -105,7 +106,15 @@ func _move_towards_player() -> void:
 
 	move_and_slide()
 
+# --- THIS IS THE FIXED FUNCTION ---
 func _should_freeze() -> bool:
+	# 1. NEW LOGIC: CHECK BLINK STATUS
+	# We use .get() to avoid errors if the player script isn't loaded yet
+	if player.get("is_blinking") == true:
+		return false # DO NOT FREEZE (Move!)
+		
+	# -----------------------------------------------
+	
 	var check_pos_center: Vector3 = global_position + Vector3.UP * check_height_mid
 	
 	var dir_world: Vector3 = (check_pos_center - cam.global_position).normalized()
