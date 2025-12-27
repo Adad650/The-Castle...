@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-# --- Options ---
+# --- Movement Options ---
 @export var can_move : bool = true
 @export var has_gravity : bool = true
 @export var can_jump : bool = true
@@ -23,6 +23,16 @@ extends CharacterBody3D
 @export var input_sprint : String = "run"
 @export var input_freefly : String = "freefly"
 @export var input_light : String = "light"
+@export var input_blink : String = "blink" # Make sure this matches Input Map exactly
+
+# --- Blink Settings ---
+@export_group("Blinking")
+@export var max_eye_open_time: float = 8.0     
+@export var blink_duration_short: float = 0.15 
+@export var blink_duration_long: float = 2.0   
+# CHECK THESE PATHS CAREFULLY IN THE INSPECTOR
+@export var blink_overlay_path: NodePath = "CanvasLayer/BlinkOverlay"
+@export var fatigue_bar_path: NodePath = "CanvasLayer/EyeFatigueBar" 
 
 # --- State Variables ---
 var mouse_captured : bool = false
@@ -30,62 +40,78 @@ var look_rotation : Vector2
 var move_speed : float = 0.0
 var freeflying : bool = false
 
-# --- Node References ---
+# --- Blink State ---
+var is_blinking: bool = false
+var current_eye_time: float = 0.0
+
+# --- Nodes ---
 @onready var head: Node3D = $Head
 @onready var collider: CollisionShape3D = $Collider
-# Make sure your SpotLight3D is named "Flashlight" and is a child of Camera3D
 @onready var flashlight: SpotLight3D = $Head/Camera3D/Flashlight
 
+# We grab these in _ready to ensure they exist
+var blink_overlay: ColorRect 
+var fatigue_bar: ProgressBar # Or TextureProgressBar
+
 func _ready() -> void:
+	# --- DEBUGGING UI CONNECTION ---
+	blink_overlay = get_node_or_null(blink_overlay_path)
+	fatigue_bar = get_node_or_null(fatigue_bar_path)
+	
+	if blink_overlay:
+		print("✅ UI SUCCESS: BlinkOverlay found!")
+		blink_overlay.modulate.a = 0.0 # Make transparent start
+		blink_overlay.visible = true
+	else:
+		print("❌ UI ERROR: BlinkOverlay NOT found at path: ", blink_overlay_path)
+		
+	if fatigue_bar:
+		print("✅ UI SUCCESS: FatigueBar found!")
+		fatigue_bar.max_value = 100
+		fatigue_bar.value = 0
+	else:
+		print("⚠️ UI WARNING: FatigueBar NOT found at path: ", fatigue_bar_path)
+
 	check_input_mappings()
 	look_rotation.y = rotation.y
 	look_rotation.x = head.rotation.x
 	
-	# Start with flashlight off (optional)
-	if flashlight:
-		flashlight.visible = false
-	else:
-		print("WARNING: Flashlight node not found. Check path in player.gd")
+	if flashlight: flashlight.visible = false
 
-func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		capture_mouse()
-	if Input.is_key_pressed(KEY_ESCAPE):
-		release_mouse()
+func _process(delta: float) -> void:
+	# --- 1. HANDLE INPUTS ---
+	# We put this in _process to ensure it catches the press every frame
+	if Input.is_action_just_pressed(input_blink):
+		if not is_blinking:
+			print("👀 Blink Button Pressed!")
+			start_blink(blink_duration_short)
 	
-	if mouse_captured and event is InputEventMouseMotion:
-		rotate_look(event.relative)
-
-	# Freefly Toggle
-	if can_freefly and Input.is_action_just_pressed(input_freefly):
-		if not freeflying:
-			enable_freefly()
-		else:
-			disable_freefly()
-			
-	# Flashlight Toggle
-	if Input.is_action_just_pressed(input_light):
-		if flashlight:
-			flashlight.visible = not flashlight.visible
+	# --- 2. EYE FATIGUE LOGIC ---
+	if not is_blinking:
+		current_eye_time += delta
+		
+		# Update Progress Bar
+		if fatigue_bar:
+			var percentage = (current_eye_time / max_eye_open_time) * 100
+			fatigue_bar.value = percentage
+		
+		# Forced Penalty Blink
+		if current_eye_time >= max_eye_open_time:
+			print("⚠️ Forced Blink Triggered!")
+			start_blink(blink_duration_long)
 
 func _physics_process(delta: float) -> void:
-	# Freefly Movement
 	if can_freefly and freeflying:
-		var input_dir := Input.get_vector(input_left, input_right, input_forward, input_back)
-		var motion := (head.global_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-		motion *= freefly_speed * delta
-		move_and_collide(motion)
+		handle_freefly(delta)
 		return
-	
+
 	# Gravity
-	if has_gravity:
-		if not is_on_floor():
-			velocity += get_gravity() * delta
+	if has_gravity and not is_on_floor():
+		velocity += get_gravity() * delta
 
 	# Jump
-	if can_jump:
-		if Input.is_action_just_pressed(input_jump) and is_on_floor():
-			velocity.y = jump_velocity
+	if can_jump and Input.is_action_just_pressed(input_jump) and is_on_floor():
+		velocity.y = jump_velocity
 
 	# Sprint
 	if can_sprint and Input.is_action_pressed(input_sprint):
@@ -93,7 +119,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		move_speed = base_speed
 
-	# Standard Movement
+	# Move
 	if can_move:
 		var input_dir := Input.get_vector(input_left, input_right, input_forward, input_back)
 		var move_dir := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
@@ -110,7 +136,43 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-# --- Helper Functions ---
+# --- BLINK FUNCTION ---
+func start_blink(duration: float):
+	# If UI is missing, we still want the mechanic to work logic-wise, 
+	# but we can't show the visual.
+	is_blinking = true
+	current_eye_time = 0.0 # Reset Timer Immediately
+	
+	if blink_overlay:
+		# Close Eyes (Alpha 0 -> 1)
+		var tween = get_tree().create_tween()
+		tween.tween_property(blink_overlay, "modulate:a", 1.0, 0.1)
+	
+	# Wait for the duration (eyes closed)
+	await get_tree().create_timer(duration).timeout
+	
+	if blink_overlay:
+		# Open Eyes (Alpha 1 -> 0)
+		var tween = get_tree().create_tween()
+		tween.tween_property(blink_overlay, "modulate:a", 0.0, 0.1)
+	
+	is_blinking = false
+	print("👀 Eyes Opened")
+
+# --- INPUT HANDLING ---
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT): capture_mouse()
+	if Input.is_key_pressed(KEY_ESCAPE): release_mouse()
+	
+	if mouse_captured and event is InputEventMouseMotion:
+		rotate_look(event.relative)
+
+	if can_freefly and Input.is_action_just_pressed(input_freefly):
+		if not freeflying: enable_freefly()
+		else: disable_freefly()
+			
+	if Input.is_action_just_pressed(input_light):
+		if flashlight: flashlight.visible = not flashlight.visible
 
 func rotate_look(rot_input : Vector2):
 	look_rotation.x -= rot_input.y * look_speed
@@ -120,6 +182,12 @@ func rotate_look(rot_input : Vector2):
 	rotate_y(look_rotation.y)
 	head.transform.basis = Basis()
 	head.rotate_x(look_rotation.x)
+
+func handle_freefly(delta):
+	var input_dir := Input.get_vector(input_left, input_right, input_forward, input_back)
+	var motion := (head.global_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	motion *= freefly_speed * delta
+	move_and_collide(motion)
 
 func enable_freefly():
 	collider.disabled = true
@@ -139,11 +207,7 @@ func release_mouse():
 	mouse_captured = false
 
 func check_input_mappings():
-	# Checks if actions exist in the Input Map to prevent crashes
-	var actions = [input_left, input_right, input_forward, input_back, input_jump, input_sprint, input_freefly]
+	var actions = [input_blink]
 	for action in actions:
 		if not InputMap.has_action(action):
-			push_warning("Missing Input Action: " + action)
-			
-	if not InputMap.has_action(input_light):
-		push_warning("Missing Input Action: " + input_light + " (Flashlight wont work)")
+			print("❌ CRITICAL ERROR: Input Action '", action, "' is missing in Project Settings!")

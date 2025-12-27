@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bv1a1rd3xlr5j" path="res://scripts/angel.gd" id="1_nvp8c"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4jhv0"]
-height = 3.39682
+height = 2.88054
 radius = 1.13135
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_r6ntq"]
@@ -21,7 +21,7 @@ exclude_parent = false
 transform = Transform3D(-0.999991, 0, 0.00420632, 0, 1, 0, -0.00420632, 0, -0.999991, 0.0475701, 0, -0.107866)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.644239, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29437, 0)
+transform = Transform3D(0.644239, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55251, 0)
 shape = SubResource("CylinderShape3D_4jhv0")
 
 [node name="HitArea" type="Area3D" parent="."]
