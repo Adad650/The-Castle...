@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://ipjs4rgpg54c"]
+
+[ext_resource type="Texture2D" uid="uid://bqaeah3ypiocf" path="res://models/mainMenuBG.jpg" id="1_qdkas"]
+[ext_resource type="FontFile" uid="uid://brkpvvx4pt8sc" path="res://models/FOnts/VCR_OSD_MONO_1.001.ttf" id="2_tkikb"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.998
+anchor_bottom = 0.869
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 0.303955
+offset_bottom = 185.888
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_qdkas")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.884
+offset_left = 628.0
+offset_top = 196.0
+offset_right = -196.0
+offset_bottom = -306.832
+theme_override_fonts/font = ExtResource("2_tkikb")
+theme_override_font_sizes/font_size = 43
+text = "The Castle..."
