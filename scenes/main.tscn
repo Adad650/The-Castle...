@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://s7q6ctg7glxl"]
+[gd_scene load_steps=55 format=3 uid="uid://s7q6ctg7glxl"]
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/addons/proto_controller/proto_controller.tscn" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://6b7h0wl3oyh5" path="res://scenes/LightEnemy.tscn" id="2_a8y0u"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://b47vcbabypeb0" path="res://scenes/time_label.gd" id="4_pm3ni"]
 [ext_resource type="FontFile" uid="uid://brkpvvx4pt8sc" path="res://models/FOnts/VCR_OSD_MONO_1.001.ttf" id="4_y6deb"]
 [ext_resource type="PackedScene" uid="uid://d3mj6poaf77cl" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallDoorwayNoDoor.tscn" id="5_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://cp1a7v2gxqvni" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallCorner.tscn" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://boes4u5aguxxf" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallTSplit.tscn" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://c3cmw674wyx0t" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/pillar.tscn" id="8_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://c5r5xc23uca7o" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/floorTile.tscn" id="9_85g3d"]
@@ -25,8 +24,8 @@
 [ext_resource type="PackedScene" uid="uid://ddymevdyvd0q2" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallArched.tscn" id="20_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://cijciqg2rlqtr" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallWindowClosed.tscn" id="21_yc10j"]
 [ext_resource type="Script" uid="uid://cpc5tlotxd0ry" path="res://scenes/moving_wall.gd" id="22_og1vs"]
-[ext_resource type="AudioStream" uid="uid://c8miiyxcuxv3m" path="res://scenes/scary-horror-music-438670.mp3" id="26_2wyq8"]
-[ext_resource type="PackedScene" uid="uid://cp1a7v2gxqvni" path="res://buildings/wallCorner.tscn" id="27_vxglm"]
+[ext_resource type="AudioStream" uid="uid://bges36b0pp7ny" path="res://sound/scary-horror-music-438670.mp3" id="26_2wyq8"]
+[ext_resource type="PackedScene" uid="uid://cp1a7v2gxqvni" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallCorner.tscn" id="27_vxglm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -44,9 +43,9 @@ tonemap_mode = 2
 shader = ExtResource("3_jscy8")
 shader_parameter/range = 0.055
 shader_parameter/noise_quality = 250.0
-shader_parameter/noise_intensity = 0.021
-shader_parameter/offset_intensity = 0.002
-shader_parameter/color_bleeding = 0.026
+shader_parameter/noise_intensity = 0.007
+shader_parameter/offset_intensity = 0.0
+shader_parameter/color_bleeding = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eb6dy"]
 
@@ -393,35 +392,14 @@ light_color = Color(0, 0, 0, 1)
 light_energy = 0.109
 light_angular_distance = 83.39
 
-[node name="Base" type="CSGBox3D" parent="."]
-transform = Transform3D(5.92686, -0.000579861, 0.00259271, 0.00345052, 0.999999, -0.0032624, -0.00801377, 0.00170396, 1.91554, 32.508, -5.10975, -37.6549)
-use_collision = true
-size = Vector3(21.9963, 1, 35.8437)
-
 [node name="Base2" type="CSGBox3D" parent="."]
-transform = Transform3D(5.92686, -0.000579861, 0.00259284, 0.00345052, 0.999999, -0.0032624, -0.00801377, 0.00170396, 1.91554, 38.3415, -5.10799, -37.5556)
+transform = Transform3D(5.92686, -0.000579861, 0.00259292, 0.00345052, 0.999999, -0.00326239, -0.00801377, 0.00170396, 1.91554, 46.0972, -5.11172, -32.7263)
 use_collision = true
-size = Vector3(16.1813, 1, 35.8437)
-
-[node name="Base3" type="CSGBox3D" parent="."]
-transform = Transform3D(5.92686, -0.000579861, 0.00259271, 0.00345052, 0.999999, -0.0032624, -0.00801377, 0.00170396, 1.91554, 9.8616, -5.12618, -37.4114)
-use_collision = true
-size = Vector3(21.9963, 1, 35.8437)
-
-[node name="Base4" type="CSGBox3D" parent="."]
-transform = Transform3D(5.92686, -0.000579861, 0.00259271, 0.00345052, 0.999999, -0.0032624, -0.00801377, 0.00170396, 1.91554, -1.55937, -5.13447, -37.2885)
-use_collision = true
-size = Vector3(21.9963, 1, 35.8437)
-
-[node name="Base5" type="CSGBox3D" parent="."]
-transform = Transform3D(5.92686, -0.000579861, 0.00259272, 0.00345052, 0.999999, -0.0032624, -0.00801377, 0.00170396, 1.91554, -12.9382, -5.14272, -37.1662)
-use_collision = true
-size = Vector3(21.9963, 1, 35.8437)
+size = Vector3(18.7962, 1, 30.7905)
 
 [node name="player" parent="." instance=ExtResource("1_0wfyh")]
 transform = Transform3D(1, -6.36646e-12, 0, -1.36424e-11, 1, -8.73115e-11, 0, 0, 1, -2.39249, -3.75227, 2.65591)
 can_sprint = true
-can_freefly = true
 
 [node name="flashlight" type="SpotLight3D" parent="player/Head/Camera3D" index="0"]
 transform = Transform3D(1, -5.22959e-11, -9.31323e-10, 6.50289e-11, 1, 0, 0, -5.82077e-11, 1, -0.000697851, -0.732863, 0.000399113)
@@ -529,7 +507,8 @@ transform = Transform3D(0.999942, -0.000721064, 0.010754, 0.000725461, 0.999999,
 transform = Transform3D(0.0112252, -0.000721064, -0.999937, -0.000404736, 0.999999, -0.000725652, 0.999937, 0.000412855, 0.0112249, 84.4186, -3.2458, -10.5535)
 
 [node name="GhostSprite" parent="shadowRunner" index="0"]
-modulate = Color(1, 1, 1, 0.411765)
+transform = Transform3D(1, 0, 0, 0, 1, -1.0571e-18, 0, 1.71914e-17, 1, -6.58933, 0, -11.8772)
+modulate = Color(1, 1, 1, 0.164706)
 
 [node name="CollisionShape3D" parent="shadowRunner/TriggerArea" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, -4.40743e-15, 0, 6.83047e-18, 1, -4.15419, -0.344482, 13.0172)
@@ -584,7 +563,7 @@ shape = SubResource("BoxShape3D_dp3eg")
 [node name="StaticBody3D2" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.15609, 1.34336, 6.40752)
 
-[node name="StaticBody3D4" parent="StaticBody3D791/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D4" parent="StaticBody3D791/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 2.80151, 1.34336, 6.41213)
 
 [node name="StaticBody3D5" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
@@ -593,10 +572,10 @@ transform = Transform3D(0.0107537, 0.000725462, 0.999942, -0.000412856, 1, -0.00
 [node name="StaticBody3D6" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(0.0107537, 0.000725462, 0.999942, -0.000412856, 1, -0.000721064, -0.999943, -0.000405077, 0.010754, 2.84347, 1.34235, -1.54985)
 
-[node name="StaticBody3D" parent="StaticBody3D791/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D" parent="StaticBody3D791/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.85796, 1.35604, -5.51841)
 
-[node name="StaticBody3D9" parent="StaticBody3D791/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D9" parent="StaticBody3D791/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.98181, 1.35746, -5.54755)
 
 [node name="StaticBody3D10" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
@@ -995,7 +974,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 58.844
 [node name="StaticBody3D339" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 58.8442, 4.73849, -58.7265)
 
-[node name="StaticBody3D12" parent="StaticBody3D791/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D12" parent="StaticBody3D791/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(-0.999943, 0.000725462, 0.0107536, 0.000721064, 1, -0.000412856, -0.0107539, -0.000405077, -0.999943, -8.01336, 1.3439, 6.38101)
 
 [node name="StaticBody3D13" parent="StaticBody3D791/Buildings" instance=ExtResource("8_tipki")]
@@ -1007,13 +986,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.15609, 4.80911, 6.40752)
 [node name="StaticBody3D19" parent="StaticBody3D791/Buildings" instance=ExtResource("5_tbgi4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.41947, 4.80911, 6.20654)
 
-[node name="StaticBody3D20" parent="StaticBody3D791/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D20" parent="StaticBody3D791/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 2.80151, 4.80911, 6.41213)
 
 [node name="StaticBody3D21" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(0.0107537, 0.000725462, 0.999942, -0.000412856, 1, -0.000721063, -0.999942, -0.000405077, 0.010754, 2.80487, 4.8081, 2.44381)
 
-[node name="StaticBody3D22" parent="StaticBody3D791/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D22" parent="StaticBody3D791/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.85796, 4.82178, -5.51841)
 
 [node name="StaticBody3D23" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
@@ -1046,10 +1025,10 @@ transform = Transform3D(1, -1.81899e-12, 0, -6.63931e-11, 1, -2.91038e-11, 0, 0,
 [node name="StaticBody3D30" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, -1.81899e-12, 0, -6.63931e-11, 1, -2.91038e-11, 0, 0, 1, -4.84703, 4.82229, -5.52254)
 
-[node name="StaticBody3D101" parent="StaticBody3D791/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D101" parent="StaticBody3D791/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.85796, 8.09722, -5.51841)
 
-[node name="StaticBody3D352" parent="StaticBody3D791/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D352" parent="StaticBody3D791/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90879, 8.09722, -5.51841)
 
 [node name="StaticBody3D103" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
@@ -1439,7 +1418,7 @@ transform = Transform3D(1, -1.81899e-12, 0, -6.63931e-11, 1, -2.91038e-11, 0, 0,
 [node name="StaticBody3D126" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, -1.81899e-12, 0, -6.63931e-11, 1, -2.91038e-11, 0, 0, 1, -5.78559, 8.18065, -5.52254)
 
-[node name="StaticBody3D24" parent="StaticBody3D791/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D24" parent="StaticBody3D791/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.98181, 4.82321, -5.54755)
 
 [node name="StaticBody3D25" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
@@ -1448,7 +1427,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.990
 [node name="StaticBody3D26" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.99081, 4.81406, -1.56872)
 
-[node name="StaticBody3D27" parent="StaticBody3D791/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D27" parent="StaticBody3D791/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(-0.999943, 0.000725462, 0.0107536, 0.000721064, 1, -0.000412856, -0.0107539, -0.000405077, -0.999943, -8.01336, 4.80964, 6.38101)
 
 [node name="StaticBody3D28" parent="StaticBody3D791/Buildings" instance=ExtResource("8_tipki")]
@@ -1523,7 +1502,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.15609, 8.98016, 6.40752)
 [node name="StaticBody3D366" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24329, 8.98016, 6.40752)
 
-[node name="StaticBody3D127" parent="StaticBody3D791/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D127" parent="StaticBody3D791/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 2.80151, 8.98016, 6.41213)
 
 [node name="StaticBody3D128" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
@@ -1538,7 +1517,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.990
 [node name="StaticBody3D374" parent="StaticBody3D791/Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.99081, 8.98511, -3.9431)
 
-[node name="StaticBody3D355" parent="StaticBody3D791/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D355" parent="StaticBody3D791/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(-0.999943, 0.000725462, 0.0107536, 0.000721064, 1, -0.000412856, -0.0107539, -0.000405077, -0.999943, -8.01336, 8.98069, 6.38101)
 
 [node name="StaticBody3D356" parent="StaticBody3D791/Buildings" instance=ExtResource("8_tipki")]
@@ -4822,10 +4801,10 @@ transform = Transform3D(0.0107537, 0.000725462, 0.999942, -0.000412856, 1, -0.00
 [node name="StaticBody3D6" parent="StaticBody3D790/Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(0.0107537, 0.000725462, 0.999942, -0.000412856, 1, -0.000721064, -0.999943, -0.000405077, 0.010754, 2.84347, 1.34235, -1.54985)
 
-[node name="StaticBody3D" parent="StaticBody3D790/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D" parent="StaticBody3D790/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.85796, 1.35604, -5.51841)
 
-[node name="StaticBody3D9" parent="StaticBody3D790/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D9" parent="StaticBody3D790/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.98181, 1.35746, -5.54755)
 
 [node name="StaticBody3D56" parent="StaticBody3D790/Buildings" instance=ExtResource("4_jyhfs")]
@@ -5119,7 +5098,7 @@ transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 2.85755,
 [node name="StaticBody3D21" parent="StaticBody3D790/Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(0.0107537, 0.000725462, 0.999942, -0.000412856, 1, -0.000721063, -0.999942, -0.000405077, 0.010754, 2.80487, 4.8081, 2.44381)
 
-[node name="StaticBody3D22" parent="StaticBody3D790/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D22" parent="StaticBody3D790/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.85796, 4.82178, -5.51841)
 
 [node name="StaticBody3D23" parent="StaticBody3D790/Buildings" instance=ExtResource("4_jyhfs")]
@@ -5152,10 +5131,10 @@ transform = Transform3D(1, -1.81899e-12, 0, -6.63931e-11, 1, -2.91038e-11, 0, 0,
 [node name="StaticBody3D30" parent="StaticBody3D790/Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, -1.81899e-12, 0, -6.63931e-11, 1, -2.91038e-11, 0, 0, 1, -4.84703, 4.82229, -5.52254)
 
-[node name="StaticBody3D101" parent="StaticBody3D790/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D101" parent="StaticBody3D790/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.85796, 8.09722, -5.51841)
 
-[node name="StaticBody3D352" parent="StaticBody3D790/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D352" parent="StaticBody3D790/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.90879, 8.09722, -5.51841)
 
 [node name="StaticBody3D103" parent="StaticBody3D790/Buildings" instance=ExtResource("4_jyhfs")]
@@ -5533,7 +5512,7 @@ transform = Transform3D(1, -1.81899e-12, 0, -6.63931e-11, 1, -2.91038e-11, 0, 0,
 [node name="StaticBody3D126" parent="StaticBody3D790/Buildings" instance=ExtResource("4_jyhfs")]
 transform = Transform3D(1, -1.81899e-12, 0, -6.63931e-11, 1, -2.91038e-11, 0, 0, 1, -5.78559, 8.18065, -5.52254)
 
-[node name="StaticBody3D24" parent="StaticBody3D790/Buildings" instance=ExtResource("6_tefeu")]
+[node name="StaticBody3D24" parent="StaticBody3D790/Buildings" instance=ExtResource("27_vxglm")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.98181, 4.82321, -5.54755)
 
 [node name="StaticBody3D28" parent="StaticBody3D790/Buildings" instance=ExtResource("8_tipki")]
@@ -8885,6 +8864,7 @@ transform = Transform3D(1, -1.03819e-09, 0, 1.04774e-09, 1, 5.23869e-10, 0, 2.61
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("26_2wyq8")
 autoplay = true
+max_distance = 4096.0
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(0.954488, -0.00623001, -0.298183, 0.298095, -0.012126, 0.954459, -0.00956206, -0.999907, -0.00971702, 57.6437, 0.0475101, -14.402)

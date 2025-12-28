@@ -12,7 +12,7 @@ extends CharacterBody3D
 @export var base_speed : float = 7.0
 @export var jump_velocity : float = 4.5
 @export var sprint_speed : float = 10.0
-@export var freefly_speed : float = 25.0
+@export var freefly_speed : float = 50.0
 
 @export_group("Input Actions")
 @export var input_left : String = "left"

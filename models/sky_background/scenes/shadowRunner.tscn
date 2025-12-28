@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bgy4opv7ugtqc" path="res://jumpscare.jpeg" id="1_etrwc"]
 [ext_resource type="Script" uid="uid://cn42pv7o403ks" path="res://scripts/shadowRunner.gd" id="1_iwyu2"]
-[ext_resource type="AudioStream" uid="uid://dq0bs7u37nwpg" path="res://scenes/hallway.mp3" id="2_x0jfa"]
+[ext_resource type="AudioStream" uid="uid://dq0bs7u37nwpg" path="res://sound/hallway.mp3" id="2_x0jfa"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_etrwc"]
 size = Vector3(7.08252, 1.68896, 0.303223)

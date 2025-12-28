@@ -1,40 +1,62 @@
-[gd_scene load_steps=3 format=3 uid="uid://ipjs4rgpg54c"]
+[gd_scene load_steps=6 format=3 uid="uid://ipjs4rgpg54c"]
 
+[ext_resource type="Script" uid="uid://d3qs4gmm7ioi1" path="res://scenes/main_meny.gd" id="1_krmnb"]
 [ext_resource type="Texture2D" uid="uid://bqaeah3ypiocf" path="res://models/mainMenuBG.jpg" id="1_qdkas"]
 [ext_resource type="FontFile" uid="uid://brkpvvx4pt8sc" path="res://models/FOnts/VCR_OSD_MONO_1.001.ttf" id="2_tkikb"]
+[ext_resource type="AudioStream" uid="uid://d0vyidrf2iuyu" path="res://sound/main-menu-click-453570.mp3" id="4_tecj3"]
+[ext_resource type="AudioStream" uid="uid://cxw4cvhgi6hha" path="res://sound/dark-horror-opener-443328.mp3" id="5_wfetq"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
-anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.883
+offset_bottom = 80.816
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_krmnb")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.998
-anchor_bottom = 0.869
-offset_left = 4.0
-offset_top = 1.0
-offset_right = 0.303955
-offset_bottom = 185.888
+anchor_right = 1.0
+anchor_bottom = 0.99
+offset_right = 2.0
+offset_bottom = 1.52997
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_qdkas")
 expand_mode = 1
-stretch_mode = 4
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.884
-offset_left = 628.0
-offset_top = 196.0
-offset_right = -196.0
-offset_bottom = -306.832
+offset_left = 662.0
+offset_top = 157.0
+offset_right = -162.0
+offset_bottom = -345.832
 theme_override_fonts/font = ExtResource("2_tkikb")
 theme_override_font_sizes/font_size = 43
 text = "The Castle..."
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.871
+offset_left = 104.0
+offset_top = 234.0
+offset_right = -896.0
+offset_bottom = -273.408
+theme_override_font_sizes/font_size = 32
+text = "Start"
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_tecj3")
+
+[node name="sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_wfetq")
+autoplay = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
