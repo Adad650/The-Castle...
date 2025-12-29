@@ -1,31 +1,31 @@
 [gd_scene load_steps=55 format=3 uid="uid://s7q6ctg7glxl"]
 
-[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/addons/proto_controller/proto_controller.tscn" id="1_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://6b7h0wl3oyh5" path="res://scenes/LightEnemy.tscn" id="2_a8y0u"]
-[ext_resource type="PackedScene" uid="uid://hpierj3cia8r" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/chest.tscn" id="2_sugp2"]
+[ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://models/sky_background/models/sky_background/addons/proto_controller/proto_controller.tscn" id="1_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://6b7h0wl3oyh5" path="res://models/sky_background/models/sky_background/scenes/LightEnemy.tscn" id="2_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://hpierj3cia8r" path="res://models/sky_background/models/sky_background/buildings/chest.tscn" id="2_sugp2"]
 [ext_resource type="Shader" uid="uid://w7bl420lk23f" path="res://scenes/main.gdshader" id="3_jscy8"]
-[ext_resource type="PackedScene" uid="uid://dehrxu1p7v4qh" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/chestPhysics.tscn" id="3_sugp2"]
-[ext_resource type="PackedScene" uid="uid://d2lv20w7clkfl" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wall.tscn" id="4_jyhfs"]
-[ext_resource type="Script" uid="uid://b47vcbabypeb0" path="res://scenes/time_label.gd" id="4_pm3ni"]
+[ext_resource type="PackedScene" uid="uid://dehrxu1p7v4qh" path="res://models/sky_background/models/sky_background/buildings/chestPhysics.tscn" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://d2lv20w7clkfl" path="res://models/sky_background/models/sky_background/buildings/wall.tscn" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://b47vcbabypeb0" path="res://models/sky_background/models/sky_background/models/sky_background/scenes/time_label.gd" id="4_pm3ni"]
 [ext_resource type="FontFile" uid="uid://brkpvvx4pt8sc" path="res://models/FOnts/VCR_OSD_MONO_1.001.ttf" id="4_y6deb"]
-[ext_resource type="PackedScene" uid="uid://d3mj6poaf77cl" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallDoorwayNoDoor.tscn" id="5_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://boes4u5aguxxf" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallTSplit.tscn" id="8_tipki"]
-[ext_resource type="PackedScene" uid="uid://c3cmw674wyx0t" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/pillar.tscn" id="8_ya4ey"]
-[ext_resource type="PackedScene" uid="uid://c5r5xc23uca7o" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/floorTile.tscn" id="9_85g3d"]
-[ext_resource type="PackedScene" uid="uid://bjsh2bbm0ipp8" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/ceiling.tscn" id="10_choun"]
-[ext_resource type="PackedScene" uid="uid://dblgcpfmjtlsk" path="res://scenes/shadowRunner.tscn" id="11_eb6dy"]
-[ext_resource type="PackedScene" uid="uid://c5ar2dnm52u5o" path="res://scenes/Angel.tscn" id="12_eb6dy"]
-[ext_resource type="PackedScene" uid="uid://c01nuxf2be1u6" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/floorWood.tscn" id="13_trceg"]
+[ext_resource type="PackedScene" uid="uid://d3mj6poaf77cl" path="res://models/sky_background/models/sky_background/buildings/wallDoorwayNoDoor.tscn" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://boes4u5aguxxf" path="res://models/sky_background/models/sky_background/buildings/wallTSplit.tscn" id="8_tipki"]
+[ext_resource type="PackedScene" uid="uid://c3cmw674wyx0t" path="res://models/sky_background/models/sky_background/buildings/pillar.tscn" id="8_ya4ey"]
+[ext_resource type="PackedScene" uid="uid://c5r5xc23uca7o" path="res://models/sky_background/models/sky_background/buildings/floorTile.tscn" id="9_85g3d"]
+[ext_resource type="PackedScene" uid="uid://bjsh2bbm0ipp8" path="res://models/sky_background/models/sky_background/buildings/ceiling.tscn" id="10_choun"]
+[ext_resource type="PackedScene" uid="uid://dblgcpfmjtlsk" path="res://models/sky_background/models/sky_background/scenes/shadowRunner.tscn" id="11_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://c5ar2dnm52u5o" path="res://models/sky_background/models/sky_background/scenes/Angel.tscn" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://c01nuxf2be1u6" path="res://models/sky_background/models/sky_background/buildings/floorWood.tscn" id="13_trceg"]
 [ext_resource type="Script" uid="uid://gft2xy7x72o" path="res://scripts/movingWall.gd" id="15_jkv2x"]
-[ext_resource type="PackedScene" uid="uid://ddlpeb3nlsx7j" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallDoorway.tscn" id="16_jbj1t"]
+[ext_resource type="PackedScene" uid="uid://ddlpeb3nlsx7j" path="res://models/sky_background/models/sky_background/buildings/wallDoorway.tscn" id="16_jbj1t"]
 [ext_resource type="Script" uid="uid://coh1c0qa3u5ws" path="res://scripts/openDoor.gd" id="17_muem4"]
-[ext_resource type="Script" uid="uid://b276prlgwjyp0" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wall.gd" id="18_0ld40"]
-[ext_resource type="PackedScene" uid="uid://doyievgrvtsb4" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallShelves.tscn" id="19_0ld40"]
-[ext_resource type="PackedScene" uid="uid://ddymevdyvd0q2" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallArched.tscn" id="20_gqmmt"]
-[ext_resource type="PackedScene" uid="uid://cijciqg2rlqtr" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallWindowClosed.tscn" id="21_yc10j"]
-[ext_resource type="Script" uid="uid://cpc5tlotxd0ry" path="res://scenes/moving_wall.gd" id="22_og1vs"]
-[ext_resource type="AudioStream" uid="uid://bges36b0pp7ny" path="res://sound/scary-horror-music-438670.mp3" id="26_2wyq8"]
-[ext_resource type="PackedScene" uid="uid://cp1a7v2gxqvni" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallCorner.tscn" id="27_vxglm"]
+[ext_resource type="Script" uid="uid://b276prlgwjyp0" path="res://models/sky_background/models/sky_background/buildings/wall.gd" id="18_0ld40"]
+[ext_resource type="PackedScene" uid="uid://doyievgrvtsb4" path="res://models/sky_background/models/sky_background/buildings/wallShelves.tscn" id="19_0ld40"]
+[ext_resource type="PackedScene" uid="uid://ddymevdyvd0q2" path="res://models/sky_background/models/sky_background/buildings/wallArched.tscn" id="20_gqmmt"]
+[ext_resource type="PackedScene" uid="uid://cijciqg2rlqtr" path="res://models/sky_background/models/sky_background/buildings/wallWindowClosed.tscn" id="21_yc10j"]
+[ext_resource type="Script" uid="uid://cpc5tlotxd0ry" path="res://models/sky_background/models/sky_background/scenes/moving_wall.gd" id="22_og1vs"]
+[ext_resource type="AudioStream" uid="uid://bmonphc1sud6k" path="res://sound/scary-horror-music-438670.mp3" id="26_2wyq8"]
+[ext_resource type="PackedScene" uid="uid://cp1a7v2gxqvni" path="res://models/sky_background/models/sky_background/buildings/wallCorner.tscn" id="27_vxglm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -42,9 +42,9 @@ tonemap_mode = 2
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jscy8"]
 shader = ExtResource("3_jscy8")
 shader_parameter/range = 0.055
-shader_parameter/noise_quality = 250.0
-shader_parameter/noise_intensity = 0.007
-shader_parameter/offset_intensity = 0.0
+shader_parameter/noise_quality = 150.0
+shader_parameter/noise_intensity = 0.008
+shader_parameter/offset_intensity = 0.003
 shader_parameter/color_bleeding = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eb6dy"]

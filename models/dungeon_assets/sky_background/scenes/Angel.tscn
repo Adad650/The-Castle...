@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5ar2dnm52u5o"]
+
+[ext_resource type="PackedScene" uid="uid://c7dmakwpaiuqv" path="res://models/weepingAngel/SoldierStatue.glb" id="1_1aybk"]
+[ext_resource type="Script" uid="uid://bv1a1rd3xlr5j" path="res://scripts/angel.gd" id="1_nvp8c"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4jhv0"]
+height = 2.88054
+radius = 1.13135
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_r6ntq"]
+height = 3.51
+radius = 1.48096
+
+[node name="Angel" type="CharacterBody3D"]
+script = ExtResource("1_nvp8c")
+
+[node name="SightRay" type="RayCast3D" parent="."]
+exclude_parent = false
+
+[node name="Visuals" parent="." instance=ExtResource("1_1aybk")]
+transform = Transform3D(-0.999991, 0, 0.00420632, 0, 1, 0, -0.00420632, 0, -0.999991, 0.0475701, 0, -0.107866)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.644239, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55251, 0)
+shape = SubResource("CylinderShape3D_4jhv0")
+
+[node name="HitArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000256181, -0.00338233, -0.00066781)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitArea"]
+transform = Transform3D(1, 0, 0, 0, 1.22862, 0, 0, 0, 1, 0, 1.53192, 0)
+shape = SubResource("CylinderShape3D_r6ntq")
+
+[editable path="Visuals"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://doyievgrvtsb4"]
+
+[ext_resource type="PackedScene" uid="uid://cjfr7sgb4kn33" path="res://models/dungeon_assets/building/wall_shelved.glb" id="1_k5yms"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5vgav"]
+points = PackedVector3Array(2, 4, 0.499997, 0.408771, 2.89977, 0.779783, 0.439311, 2.84965, 0.789421, 1, 2.67463, 0.74993, 0.942052, 1.50117, 0.796784, 2, 0, 0.499997, 2, 4, -0.5, -2, 4, 0.499997, -1, 2.67463, 0.74993, 0.185983, 1.50117, 0.8676, 0.942052, 1.21104, 0.796784, 2, 0, -0.5, 0.185983, 1.21104, 0.8676, -2, 0, 0.499997, -2, 4, -0.5, -0.967893, 1.37314, 0.763049, -2, 0, -0.5, -1, 1.02467, 0.74993)
+
+[node name="StaticBody3D" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_5vgav")
+
+[node name="wall_shelved" parent="." instance=ExtResource("1_k5yms")]
+
+[editable path="wall_shelved"]

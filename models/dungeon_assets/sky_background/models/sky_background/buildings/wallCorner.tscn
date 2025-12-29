@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cp1a7v2gxqvni"]
+
+[ext_resource type="PackedScene" uid="uid://dv60wnrhj77e6" path="res://models/dungeon_assets/building/wall_corner.glb" id="1_k2j1b"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_m50wf"]
+points = PackedVector3Array(-0.500147, 3.44988, 2.00006, -0.250049, 3.19969, 2.00006, 0.5, 4, 1.99982, -0.500147, 4, 1.99982, -2, 4, 0.499927, -0.500147, 0, 2.00006, -0.250049, 0.5, 2.00006, 0.5, 4, -3.67463e-05, 0.5, 0, 1.99982, -2, 4, -0.5, -2, 0, 0.499927, -0.000195742, 4, -0.5, 0.5, 0, -3.67463e-05, -2, 0, -0.5, -0.000195742, 0, -0.5)
+
+[node name="StaticBody3D" type="StaticBody3D"]
+
+[node name="wall_corner2" parent="." instance=ExtResource("1_k2j1b")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_m50wf")
+
+[editable path="wall_corner2"]

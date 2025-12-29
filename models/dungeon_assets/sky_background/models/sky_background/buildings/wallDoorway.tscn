@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddlpeb3nlsx7j"]
+
+[ext_resource type="PackedScene" uid="uid://ddbyutpbcsjpl" path="res://models/dungeon_assets/building/wall_doorway.glb" id="1_oy6qw"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_oy6qw"]
+points = PackedVector3Array(-0.179901, 0, -0.100025, -0.0604806, 0.458423, -0.20005, 1.41309, 1.28563, -0.386773, 1.8201, 0, -0.100025, -0.179901, 0, 0.0999492, -0.179901, 2.09023, -0.100025, -0.0604806, 1.8415, -0.20005, 1.46027, 1.28563, -0.367995, 1.70048, 0.458423, -0.20005, 0.180122, 2.66817, -0.100025, 0.277029, 2.70962, -0.100025, 0.479653, 2.75, -0.100025, 1.16035, 2.75, -0.100025, 1.36297, 2.70962, -0.100025, 1.45988, 2.66817, -0.100025, 1.62687, 2.55672, -0.100025, 1.76979, 2.34272, -0.100025, 1.70048, 1.8415, -0.20005, 1.8201, 0, 0.0999492, 1.65291, 1.08589, -0.251085, 1.8201, 2.09023, -0.100025, 1.41309, 1.28563, 0.386773, -0.0604806, 0.458423, 0.199974, -0.179901, 2.09023, 0.0999492, -0.129784, 2.34272, -0.100025, 0.0131294, 2.55672, -0.100025, 0.227891, 2.7002, -0.0500503, 0.479653, 2.75, 0.0999492, 1.16035, 2.75, 0.0999492, 1.41211, 2.7002, -0.0500503, 1.62687, 2.55672, 0.0999492, 1.76979, 2.34272, 0.0999492, 1.65291, 1.08589, 0.251009, 1.70048, 0.458423, 0.199974, 1.8201, 2.09023, 0.0999492, 1.46027, 1.28563, 0.367919, 1.70048, 1.8415, 0.199974, 1.45988, 2.66817, 0.0999492, 1.36297, 2.70962, 0.0999492, 0.277029, 2.70962, 0.0999492, 0.180122, 2.66817, 0.0999492, -0.0604806, 1.8415, 0.199974, -0.129784, 2.34272, 0.0999492, 0.0131294, 2.55672, 0.0999492, 0.227891, 2.7002, 0.0499746, 1.41211, 2.7002, 0.0499746)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oy6qw"]
+size = Vector3(1, 4.01737, 1)
+
+[node name="StaticBody3D" type="StaticBody3D"]
+
+[node name="wall_doorway2" parent="." instance=ExtResource("1_oy6qw")]
+
+[node name="wall_doorway_door" parent="wall_doorway2/wall_doorway" index="0"]
+transform = Transform3D(-0.616692, 0, 0.787204, 0, 1, 0, -0.787204, 0, -0.616692, -0.830495, 0, 0.0631412)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.616692, 0, 0.787204, 0, 1, 0, -0.787204, 0, -0.616692, -0.809703, 0, 0.0468523)
+shape = SubResource("ConvexPolygonShape3D_oy6qw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.64553, 1.77815, -0.567245)
+shape = SubResource("BoxShape3D_oy6qw")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.70243, 1.77815, -0.567245)
+shape = SubResource("BoxShape3D_oy6qw")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.00296777, 0.999996, 0.000139338, -0.999996, -0.00296776, -4.94582e-05, -4.90481e-05, -0.000139483, 1, -0.0927021, 3.20959, -0.567249)
+shape = SubResource("BoxShape3D_oy6qw")
+
+[editable path="wall_doorway2"]

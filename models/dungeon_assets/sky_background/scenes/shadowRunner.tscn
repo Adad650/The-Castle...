@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://dblgcpfmjtlsk"]
+
+[ext_resource type="Texture2D" uid="uid://bgy4opv7ugtqc" path="res://jumpscare.jpeg" id="1_etrwc"]
+[ext_resource type="Script" uid="uid://cn42pv7o403ks" path="res://scripts/shadowRunner.gd" id="1_iwyu2"]
+[ext_resource type="AudioStream" uid="uid://dq0bs7u37nwpg" path="res://sound/hallway.mp3" id="2_x0jfa"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_etrwc"]
+size = Vector3(7.08252, 1.68896, 0.303223)
+
+[sub_resource type="Animation" id="Animation_x0jfa"]
+resource_name = "runAccrosHall"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GhostSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(7.68572, 0, 0), Vector3(-7.6031, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_iwyu2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GhostSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-7.6031, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_iwyu2"]
+_data = {
+&"RESET": SubResource("Animation_iwyu2"),
+&"runAccrosHall": SubResource("Animation_x0jfa")
+}
+
+[node name="shadowRunner" type="Node3D"]
+script = ExtResource("1_iwyu2")
+
+[node name="GhostSprite" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.6031, 0, 0)
+texture = ExtResource("1_etrwc")
+
+[node name="TriggerArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TriggerArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.230469, 9.56983)
+shape = SubResource("BoxShape3D_etrwc")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_x0jfa")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+&"": SubResource("AnimationLibrary_iwyu2")
+}
+speed_scale = 4.0

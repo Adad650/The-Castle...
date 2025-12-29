@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bloutoe3mytan"]
+
+[ext_resource type="AudioStream" uid="uid://bmonphc1sud6k" path="res://sound/scary-horror-music-438670.mp3" id="1_vp7mh"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("1_vp7mh")
+autoplay = true
