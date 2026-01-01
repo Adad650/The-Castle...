@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://wxvru4v314xu"
 path.s3tc="res://.godot/imported/zombie_albedo.png-8215a9184b62b868764013d9db9aa382.s3tc.ctex"
+path.etc2="res://.godot/imported/zombie_albedo.png-8215a9184b62b868764013d9db9aa382.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://models/zombie/zombie_albedo.png"
-dest_files=["res://.godot/imported/zombie_albedo.png-8215a9184b62b868764013d9db9aa382.s3tc.ctex"]
+dest_files=["res://.godot/imported/zombie_albedo.png-8215a9184b62b868764013d9db9aa382.s3tc.ctex", "res://.godot/imported/zombie_albedo.png-8215a9184b62b868764013d9db9aa382.etc2.ctex"]
 
 [params]
 

@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://b1x57upuwfd6u"
 path.s3tc="res://.godot/imported/SoldierStatue_Image_0.jpg-4202593f2e1519a8710af81a5b05e954.s3tc.ctex"
+path.etc2="res://.godot/imported/SoldierStatue_Image_0.jpg-4202593f2e1519a8710af81a5b05e954.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={
@@ -15,7 +16,7 @@ generator_parameters={
 [deps]
 
 source_file="res://models/weepingAngel/SoldierStatue_Image_0.jpg"
-dest_files=["res://.godot/imported/SoldierStatue_Image_0.jpg-4202593f2e1519a8710af81a5b05e954.s3tc.ctex"]
+dest_files=["res://.godot/imported/SoldierStatue_Image_0.jpg-4202593f2e1519a8710af81a5b05e954.s3tc.ctex", "res://.godot/imported/SoldierStatue_Image_0.jpg-4202593f2e1519a8710af81a5b05e954.etc2.ctex"]
 
 [params]
 

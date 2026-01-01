@@ -7,4 +7,4 @@ extends CanvasLayer
 func _ready():
 	await get_tree().create_timer(hold_seconds).timeout
 
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
+	get_tree().change_scene_to_file("res://scenes/mainMeny.tscn")

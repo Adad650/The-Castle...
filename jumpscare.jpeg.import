@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bgy4opv7ugtqc"
 path.s3tc="res://.godot/imported/jumpscare.jpeg-bbbe158782e4ca0b21644df29aee9f85.s3tc.ctex"
+path.etc2="res://.godot/imported/jumpscare.jpeg-bbbe158782e4ca0b21644df29aee9f85.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://jumpscare.jpeg"
-dest_files=["res://.godot/imported/jumpscare.jpeg-bbbe158782e4ca0b21644df29aee9f85.s3tc.ctex"]
+dest_files=["res://.godot/imported/jumpscare.jpeg-bbbe158782e4ca0b21644df29aee9f85.s3tc.ctex", "res://.godot/imported/jumpscare.jpeg-bbbe158782e4ca0b21644df29aee9f85.etc2.ctex"]
 
 [params]
 
