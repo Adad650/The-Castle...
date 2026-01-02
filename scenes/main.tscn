@@ -1,10 +1,11 @@
-[gd_scene load_steps=55 format=3 uid="uid://s7q6ctg7glxl"]
+[gd_scene load_steps=57 format=3 uid="uid://s7q6ctg7glxl"]
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/addons/proto_controller/proto_controller.tscn" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://6b7h0wl3oyh5" path="res://scenes/LightEnemy.tscn" id="2_a8y0u"]
 [ext_resource type="PackedScene" uid="uid://hpierj3cia8r" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/chest.tscn" id="2_sugp2"]
 [ext_resource type="Shader" uid="uid://w7bl420lk23f" path="res://scenes/main.gdshader" id="3_jscy8"]
 [ext_resource type="PackedScene" uid="uid://dehrxu1p7v4qh" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/chestPhysics.tscn" id="3_sugp2"]
+[ext_resource type="AudioStream" uid="uid://dxtd7tmdoskhs" path="res://sound/2-persons-walking-on-stonefloor-28579.mp3" id="3_vxglm"]
 [ext_resource type="PackedScene" uid="uid://d2lv20w7clkfl" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wall.tscn" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://b47vcbabypeb0" path="res://scenes/time_label.gd" id="4_pm3ni"]
 [ext_resource type="FontFile" uid="uid://brkpvvx4pt8sc" path="res://models/FOnts/VCR_OSD_MONO_1.001.ttf" id="4_y6deb"]
@@ -26,6 +27,7 @@
 [ext_resource type="Script" uid="uid://cpc5tlotxd0ry" path="res://scenes/moving_wall.gd" id="22_og1vs"]
 [ext_resource type="AudioStream" uid="uid://bmonphc1sud6k" path="res://sound/scary-horror-music-438670.mp3" id="26_2wyq8"]
 [ext_resource type="PackedScene" uid="uid://cp1a7v2gxqvni" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallCorner.tscn" id="27_vxglm"]
+[ext_resource type="PackedScene" uid="uid://oceaaiu4cpwo" path="res://pauseMenu.tscn" id="28_2f3dj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -408,6 +410,12 @@ light_size = 1.0
 spot_range = 21.197
 spot_angle = 20.0
 
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="player"]
+transform = Transform3D(0.99999994, -6.903065e-10, -2.7939677e-09, 5.5479177e-11, 0.99999976, -1.0186341e-09, 0, 5.820766e-11, 1.0000001, -2.3841858e-07, 0, 0)
+stream = ExtResource("3_vxglm")
+volume_db = 30.0
+max_db = 6.0
+
 [node name="CanvasLayer" type="CanvasLayer" parent="player"]
 
 [node name="BlinkOverlay" type="ColorRect" parent="player/CanvasLayer"]
@@ -456,6 +464,9 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("4_y6deb")
 theme_override_font_sizes/font_size = 32
 script = ExtResource("4_pm3ni")
+
+[node name="PauseMenu" parent="player" instance=ExtResource("28_2f3dj")]
+mouse_filter = 2
 
 [node name="Chest" parent="." instance=ExtResource("2_sugp2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.46585, -4.69777, 0.651585)
@@ -534,7 +545,7 @@ script = ExtResource("17_muem4")
 transform = Transform3D(0.99958396, 0, 0.028846001, 0, 1, 0, -0.028846001, 0, 0.99958396, -0.831028, 0, 0.0624027)
 
 [node name="CollisionShape3D2" parent="StaticBody3D791" index="1"]
-transform = Transform3D(0.9995249, 0, 0.030817317, 0, 1, 0, -0.030817317, 0, 0.9995249, -0.80917, 0, 0.0475788)
+transform = Transform3D(0.9995248, 0, 0.030817313, 0, 1, 0, -0.030817313, 0, 0.9995248, -0.80917, 0, 0.0475788)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StaticBody3D791"]
 libraries = {
@@ -3958,7 +3969,7 @@ script = ExtResource("17_muem4")
 transform = Transform3D(0.99958396, 0, 0.028846001, 0, 1, 0, -0.028846001, 0, 0.99958396, -0.831028, 0, 0.0624027)
 
 [node name="CollisionShape3D2" parent="StaticBody3D791/Buildings/StaticBody3D715" index="1"]
-transform = Transform3D(0.9995249, 0, 0.030817317, 0, 1, 0, -0.030817317, 0, 0.9995249, -0.80917, 0, 0.0475788)
+transform = Transform3D(0.9995248, 0, 0.030817313, 0, 1, 0, -0.030817313, 0, 0.9995248, -0.80917, 0, 0.0475788)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StaticBody3D791/Buildings/StaticBody3D715"]
 libraries = {
@@ -4769,7 +4780,7 @@ script = ExtResource("17_muem4")
 transform = Transform3D(0.99958396, 0, 0.028846001, 0, 1, 0, -0.028846001, 0, 0.99958396, -0.831028, 0, 0.0624027)
 
 [node name="CollisionShape3D2" parent="StaticBody3D790" index="1"]
-transform = Transform3D(0.9995249, 0, 0.030817317, 0, 1, 0, -0.030817317, 0, 0.9995249, -0.80917, 0, 0.0475788)
+transform = Transform3D(0.9995248, 0, 0.030817313, 0, 1, 0, -0.030817313, 0, 0.9995248, -0.80917, 0, 0.0475788)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StaticBody3D790"]
 libraries = {
@@ -8028,7 +8039,7 @@ script = ExtResource("17_muem4")
 transform = Transform3D(0.99958396, 0, 0.028846001, 0, 1, 0, -0.028846001, 0, 0.99958396, -0.831028, 0, 0.0624027)
 
 [node name="CollisionShape3D2" parent="StaticBody3D790/Buildings/StaticBody3D715" index="1"]
-transform = Transform3D(0.9995249, 0, 0.030817317, 0, 1, 0, -0.030817317, 0, 0.9995249, -0.80917, 0, 0.0475788)
+transform = Transform3D(0.9995248, 0, 0.030817313, 0, 1, 0, -0.030817313, 0, 0.9995248, -0.80917, 0, 0.0475788)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="StaticBody3D790/Buildings/StaticBody3D715"]
 libraries = {
@@ -8863,6 +8874,7 @@ transform = Transform3D(1, -1.03819e-09, 0, 1.04774e-09, 1, 5.23869e-10, 0, 2.61
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("26_2wyq8")
+max_db = -10.0
 autoplay = true
 max_distance = 4096.0
 
@@ -8914,6 +8926,8 @@ transform = Transform3D(0.999942, -0.000721064, 0.010754, 0.000725461, 0.999999,
 [node name="StaticBody3D3" parent="." instance=ExtResource("27_vxglm")]
 transform = Transform3D(-0.0117837, -0.000721063, 0.999931, 0.000404331, 0.999999, 0.000725878, -0.999931, 0.000412857, -0.0117834, -41.3266, 25.1941, -189.432)
 
+[connection signal="pressed" from="player/PauseMenu/VBoxContainer/resume" to="player" method="_on_resume_pressed"]
+[connection signal="pressed" from="player/PauseMenu/VBoxContainer/menu" to="player" method="_on_menu_pressed"]
 [connection signal="body_entered" from="StaticBody3D791/playerArea" to="StaticBody3D791" method="_on_player_area_body_entered"]
 [connection signal="body_entered" from="StaticBody3D791/doorOpened" to="StaticBody3D791" method="_on_door_opened_body_entered"]
 [connection signal="body_entered" from="StaticBody3D791/Buildings/StaticBody3D728/Area3D" to="StaticBody3D791/Buildings/StaticBody3D728" method="_on_area_3d_body_entered"]
@@ -8930,6 +8944,7 @@ transform = Transform3D(-0.0117837, -0.000721063, 0.999931, 0.000404331, 0.99999
 [connection signal="body_entered" from="StaticBody3D790/Buildings/MovingWall/Area3D" to="StaticBody3D790/Buildings/MovingWall" method="_on_area_3d_body_entered"]
 
 [editable path="player"]
+[editable path="player/PauseMenu"]
 [editable path="shadowRunner"]
 [editable path="shadowRunner2"]
 [editable path="StaticBody3D791"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ipjs4rgpg54c"]
+[gd_scene load_steps=7 format=3 uid="uid://ipjs4rgpg54c"]
 
 [ext_resource type="Script" uid="uid://d3qs4gmm7ioi1" path="res://scenes/main_meny.gd" id="1_krmnb"]
 [ext_resource type="Texture2D" uid="uid://bqaeah3ypiocf" path="res://models/mainMenuBG.jpg" id="1_qdkas"]
 [ext_resource type="FontFile" uid="uid://brkpvvx4pt8sc" path="res://models/FOnts/VCR_OSD_MONO_1.001.ttf" id="2_tkikb"]
 [ext_resource type="AudioStream" uid="uid://d0ire2f37t1pk" path="res://sound/main-menu-click-453570.mp3" id="4_tecj3"]
 [ext_resource type="AudioStream" uid="uid://cjas0rghkaokg" path="res://sound/dark-horror-opener-443328.mp3" id="5_wfetq"]
+[ext_resource type="Script" uid="uid://bqnsa4c81ww1d" path="res://scenes/quitButton.gd" id="6_rwvri"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -13,6 +14,7 @@ anchor_bottom = 0.883
 offset_bottom = 80.816
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_krmnb")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -69,5 +71,21 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Chapter 2"
 
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.012
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1061.936
+offset_top = 565.164
+offset_right = -24.0
+offset_bottom = -38.0
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+script = ExtResource("6_rwvri")
+
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

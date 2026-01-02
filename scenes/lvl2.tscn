@@ -1,12 +1,15 @@
-[gd_scene load_steps=24 format=3 uid="uid://crpuyq0rpcve4"]
+[gd_scene load_steps=27 format=3 uid="uid://crpuyq0rpcve4"]
 
 [ext_resource type="PackedScene" uid="uid://bs72ogkvdd7d6" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/addons/proto_controller/proto_controller.tscn" id="1_jaojv"]
+[ext_resource type="Script" uid="uid://hc2ftm5qpr1k" path="res://scenes/lvl_2.gd" id="1_kl22a"]
 [ext_resource type="Shader" uid="uid://w7bl420lk23f" path="res://scenes/main.gdshader" id="2_3n54i"]
 [ext_resource type="FontFile" uid="uid://brkpvvx4pt8sc" path="res://models/FOnts/VCR_OSD_MONO_1.001.ttf" id="3_nb5j2"]
 [ext_resource type="Script" uid="uid://b47vcbabypeb0" path="res://scenes/time_label.gd" id="4_r7wj8"]
 [ext_resource type="PackedScene" uid="uid://d2lv20w7clkfl" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wall.tscn" id="5_3n54i"]
 [ext_resource type="Script" uid="uid://bvoccmvtuguj6" path="res://scenes/buildings.gd" id="5_g6uqv"]
+[ext_resource type="PackedScene" uid="uid://oceaaiu4cpwo" path="res://pauseMenu.tscn" id="6_kpy5e"]
 [ext_resource type="PackedScene" uid="uid://ddlpeb3nlsx7j" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/wallDoorway.tscn" id="6_nb5j2"]
+[ext_resource type="AudioStream" uid="uid://dxtd7tmdoskhs" path="res://sound/2-persons-walking-on-stonefloor-28579.mp3" id="7_8yxcp"]
 [ext_resource type="PackedScene" uid="uid://c5ar2dnm52u5o" path="res://scenes/Angel.tscn" id="7_r7wj8"]
 [ext_resource type="PackedScene" uid="uid://c01nuxf2be1u6" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/floorWood.tscn" id="9_hnnuc"]
 [ext_resource type="PackedScene" uid="uid://c5r5xc23uca7o" path="res://models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/models/sky_background/buildings/floorTile.tscn" id="10_c8sub"]
@@ -673,10 +676,10 @@ _data = {
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r7wj8"]
-size = Vector3(1.6543, 1, 1)
+size = Vector3(0.2, 0.4, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hva3n"]
-size = Vector3(12, 2.6, 1)
+size = Vector3(10.3, 2.6, 1)
 
 [sub_resource type="TextMesh" id="TextMesh_g6uqv"]
 text = "Follow the light"
@@ -687,6 +690,7 @@ text = "End of Chapter 2..."
 font_size = 32
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_kl22a")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, -2.30557e-10, 2.79397e-09, -2.79397e-09, -4.356587e-08, 1, -2.3055687e-10, -1, -4.356587e-08, 6.65958, 35.2802, -71.6103)
@@ -699,11 +703,18 @@ environment = SubResource("Environment_r7wj8")
 [node name="player" parent="." instance=ExtResource("1_jaojv")]
 transform = Transform3D(1, -6.36646e-12, 0, -1.36424e-11, 1, -8.73115e-11, 0, 0, 1, -8.84317, 0.940132, 10.3198)
 can_sprint = true
+can_freefly = true
 
 [node name="SpotLight3D" type="SpotLight3D" parent="player/Head/Camera3D" index="0"]
 light_energy = 16.0
 spot_range = 8.56298
 spot_angle = 13.6841
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="player"]
+transform = Transform3D(1, -3.5470307e-11, -4.364867e-20, 5.547918e-11, 1, 2.9103844e-11, 0, 5.8207675e-11, 1, 0, 0, 0)
+stream = ExtResource("7_8yxcp")
+volume_db = 30.0
+max_db = 6.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="player"]
 
@@ -753,6 +764,9 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_nb5j2")
 theme_override_font_sizes/font_size = 32
 script = ExtResource("4_r7wj8")
+
+[node name="PauseMenu" parent="player" instance=ExtResource("6_kpy5e")]
+mouse_filter = 2
 
 [node name="buildings" type="Node" parent="."]
 script = ExtResource("5_g6uqv")
@@ -1738,7 +1752,7 @@ shape = SubResource("BoxShape3D_r7wj8")
 [node name="moveArea2" type="Area3D" parent="buildings"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="buildings/moveArea2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.5, 1.8, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.35, 1.8, -2.6999998)
 shape = SubResource("BoxShape3D_hva3n")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="buildings"]
@@ -1904,6 +1918,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -75, 0, -72.9)
 transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 1, 3, 0)
 light_energy = 16.0
 
+[node name="SpotLight3D2" type="SpotLight3D" parent="buildings/StaticBody3D349"]
+transform = Transform3D(2.9802322e-08, 4.371139e-08, -1, 1, -1.3027009e-15, 2.9802322e-08, 0, -1, -4.371139e-08, -14, 1, 67)
+light_energy = 16.0
+spot_range = 61.0
+spot_angle = 19.095894
+
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="buildings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78, 2, -85)
 mesh = SubResource("TextMesh_hva3n")
@@ -2023,5 +2043,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 0.3, -5)
 [connection signal="body_entered" from="buildings/moveArea2" to="buildings" method="_on_move_area_2_body_entered"]
 
 [editable path="player"]
+[editable path="player/PauseMenu"]
 [editable path="buildings/StaticBody3D48"]
 [editable path="buildings/StaticBody3D48/wall_doorway2"]
